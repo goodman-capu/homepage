@@ -1,0 +1,154 @@
+body
+{
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+header
+{
+    padding: 10px 30px;
+    background-color: tomato;
+    color: white;
+    font-family: cursive;
+}
+
+.horizontal
+{
+    padding: 0;
+    margin: 0;
+    font-size: 120%;
+    list-style-type: none;
+}
+
+.horizontal li
+{
+    display: inline;
+}
+
+.horizontal a
+{
+    padding: 5px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.horizontal a:hover {
+    background-color: brown;
+}
+
+footer
+{
+    padding: 10px 30px;
+    text-align: center;
+    background-color: dimgray;
+    color: white;
+    font-family:cursive;
+}
+
+header a:link, footer a:link
+{
+    color: white;
+}
+
+header a:visited, footer a:visited
+{
+    color: lightgray;
+}
+
+.main_frame
+{
+    padding: 20px;
+}
+
+.side_bar
+{
+    padding: 20px 20px;
+    position: relative;
+    float: right;
+    width: 20%;
+    border-radius: 5px;
+    box-shadow: 0 0 10px lightgray;
+    background-color: lightblue;
+}
+
+.side_bar li
+{
+    padding: 5px;
+}
+
+.side_bar a
+{
+    text-decoration: none;
+}
+
+.side_bar a:link {
+    color: black;
+}
+
+.side_bar a:visited {
+    color: dimgray;
+}
+
+.side_bar a:hover {
+    color: orangered;
+}
+
+.main_content
+{
+    width: 75%;
+}
+
+table
+{
+    border-collapse: collapse;
+}
+
+table caption
+{
+    margin: 20px;
+}
+
+table, td, th
+{
+    text-align: inherit;
+    padding: 5px;
+    border:1px solid black;
+}
+
+code
+{
+    margin: 0 2px;
+    padding: 1px 5px;
+    border: 1px solid lightgray;
+    border-radius: 3px;
+    max-width: 100%;
+    overflow: auto;
+    font-family: monospace;
+    color: slategray;
+    background-color: cornsilk;
+    text-shadow: 0 1px 0 white;
+    box-shadow: 0 0 2px lightgray;
+}
+
+pre code
+{
+    padding: 10px 0 10px 5px;
+    display: block;
+    box-shadow: 0 0 5px lightgray;
+}
+
+p
+{
+    line-height: 125%;
+}
+
+strong
+{
+    color: orangered;
+}
+
+blockquote
+{
+    font-style: italic;
+    font-weight: bold;
+}
