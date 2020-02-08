@@ -1,32 +1,27 @@
-body
-{
+body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
 }
 
-header
-{
+header {
     padding: 10px 30px;
     background-color: tomato;
     color: white;
     font-family: cursive;
 }
 
-.horizontal
-{
+.horizontal {
     padding: 0;
     margin: 0;
     font-size: 120%;
     list-style-type: none;
 }
 
-.horizontal li
-{
+.horizontal li {
     display: inline;
 }
 
-.horizontal a
-{
+.horizontal a {
     padding: 5px;
     border-radius: 5px;
     text-decoration: none;
@@ -36,8 +31,7 @@ header
     background-color: brown;
 }
 
-footer
-{
+footer {
     padding: 10px 30px;
     text-align: center;
     background-color: dimgray;
@@ -45,39 +39,39 @@ footer
     font-family:cursive;
 }
 
-header a:link, footer a:link
-{
+header a:link, footer a:link {
     color: white;
 }
 
-header a:visited, footer a:visited
-{
+header a:visited, footer a:visited {
     color: lightgray;
 }
 
-.main_frame
-{
+.main_frame {
     padding: 20px;
 }
 
-.side_bar
-{
-    padding: 20px 20px;
+@media screen and (min-width: 400px) {
+.side_bar {
     position: relative;
     float: right;
-    width: 20%;
+    width: 200px;
+}
+}
+
+.side_bar {
+    margin: 20px;
+    padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px lightgray;
     background-color: lightblue;
 }
 
-.side_bar li
-{
+.side_bar li {
     padding: 5px;
 }
 
-.side_bar a
-{
+.side_bar a {
     text-decoration: none;
 }
 
@@ -93,30 +87,21 @@ header a:visited, footer a:visited
     color: orangered;
 }
 
-.main_content
-{
-    width: 75%;
-}
-
-table
-{
+table {
     border-collapse: collapse;
 }
 
-table caption
-{
+table caption {
     margin: 20px;
 }
 
-table, td, th
-{
+table, td, th {
     text-align: inherit;
     padding: 5px;
     border:1px solid black;
 }
 
-code
-{
+code {
     margin: 0 2px;
     padding: 1px 5px;
     border: 1px solid lightgray;
@@ -130,25 +115,21 @@ code
     box-shadow: 0 0 2px lightgray;
 }
 
-pre code
-{
+pre code {
     padding: 10px 0 10px 5px;
     display: block;
     box-shadow: 0 0 5px lightgray;
 }
 
-p
-{
+p {
     line-height: 125%;
 }
 
-strong
-{
+strong {
     color: orangered;
 }
 
-blockquote
-{
+blockquote {
     font-style: italic;
     font-weight: bold;
 }
