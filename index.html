@@ -7,8 +7,106 @@
     <meta name="description" content="Zhikang Fan's homepage">
     <title>Zhikang Fan's homepage</title>
     <link rel="stylesheet" type="text/css" href="common.css">
-</head>
+    <style>
+    header {
+        padding: 10px 30px;
+        background-color: tomato;
+        color: white;
+        font-family: cursive;
+    }
 
+    footer {
+        padding: 10px 30px;
+        text-align: center;
+        background-color: dimgray;
+        color: white;
+        font-family: cursive;
+    }
+
+    header a:link, footer a:link {
+        color: white;
+    }
+
+    header a:visited, footer a:visited {
+        color: lightgray;
+    }
+
+    .horizontal {
+        padding: 0;
+        margin: 0;
+        font-size: 120%;
+        list-style-type: none;
+    }
+
+    .horizontal li {
+        display: inline;
+    }
+
+    .horizontal a {
+        padding: 5px;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+
+    .horizontal a:hover {
+        background-color: brown;
+    }
+
+    .main_frame {
+        padding: 20px;
+    }
+
+    @media screen and (min-width: 400px) {
+    .side_bar {
+        position: relative;
+        float: right;
+        width: 200px;
+    }
+    }
+
+    .side_bar {
+        margin: 20px;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px lightgray;
+        background-color: lightblue;
+    }
+
+    .side_bar li {
+        padding: 5px;
+    }
+
+    .side_bar a {
+        text-decoration: none;
+    }
+
+    .side_bar a:link {
+        color: black;
+    }
+
+    .side_bar a:visited {
+        color: dimgray;
+    }
+
+    .side_bar a:hover {
+        color: orangered;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+
+    table caption {
+        margin: 20px;
+    }
+
+    table, td, th {
+        text-align: inherit;
+        padding: 5px;
+        border:1px solid black;
+    }
+    </style>
+</head>
 <body>
 <header>
     <div>
@@ -20,7 +118,7 @@
         <li><a href="http://cloud.fanzhikang.cn" target="_blank">Cloud Disk</a></li>
         <li><a href="http://mysql.fanzhikang.cn" target="_blank">MySQL</a></li>
         <li><a href="http://admin.fanzhikang.cn" target="_blank">Admin</a></li>
-        <li><a href="codename.html" target="_blank">Code Name</a></li>
+        <li><a href="codename/" target="_blank">Code Name</a></li>
     </ul>
 </header>
 <div class="main_frame">

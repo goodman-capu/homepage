@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,viewport-fit=cover">
+    <meta name="author" content="Zhikang Fan">
+    <meta name="description" content="Code Name Generator">
+    <title>Code Name Generator</title>
+    <link rel="stylesheet" type="text/css" href="../common.css">
+    <style>
+        .token {
+            width: 50px;
+            height: 50px;
+        }
+
+        .token.blank {
+            background-color: white;
+        }
+
+        .token.blue {
+            background-color: blue;
+        }
+
+        .token.red {
+            background-color: red;
+        }
+
+        .token.bomb {
+            background-color: black;
+        }
+    </style>
+    <script src="../jquery-3.4.1.min.js"></script>
+    <script>
+    const Token = {
+        BLANK: 'blank',
+        BLUE: 'blue',
+        RED: 'red',
+        BOMB: 'bomb',
+    };
+
+    class Target {
+        constructor(min, max, token, number) {
+            if (min < 0 || number < min || number > max) {
+                throw 'token number error';
+            }
+            this.token_ = token;
+            this.number_ = number;
+            this.filled_ = 0;
+        }
+
+        fillOne() {
+            if (this.filled_ < this.number_) {
+                this.filled_ ++;
+                return this.token_;
+            }
+        }
+
+        isFilled() {
+            return this.filled_ === this.number_;
+        }
+    }
+
+    class CodeName {
+        constructor() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const x = Number(urlParams.get('x'));
+            const y = Number(urlParams.get('y'));
+            const blue = Number(urlParams.get('blue'));
+            const red = Number(urlParams.get('red'));
+            const bomb = Number(urlParams.get('bomb'));
+            if (x < 3 || x > 6 || y < 3 || y > 6) {
+                throw 'Board size error';
+            }
+            if (blue + red + bomb > x * y) {
+                throw 'Too many tokens';
+            }
+            const targets = [
+                new Target(3, 15, Token.BLUE, blue),
+                new Target(3, 15, Token.RED, red),
+                new Target(0, 5, Token.BOMB, bomb),
+            ];
+            const board = new Array(x);
+            for (let i = 0; i < board.length; i++) {
+                board[i] = new Array(y).fill(Token.BLANK);
+            }
+            while (true) {
+                let filled = true;
+                for (const target of targets) {
+                    if (!target.isFilled()) {
+                        filled = false;
+                        while (true) {
+                            const random_x = Math.floor(Math.random() * x);
+                            const random_y = Math.floor(Math.random() * y);
+                            if (board[random_x][random_y] === Token.BLANK) {
+                                board[random_x][random_y] = target.fillOne();
+                                break;
+                            }
+                        }
+                    }
+                }
+                if (filled) {
+                    break;
+                }
+            }
+            this.board_ = board;
+        }
+
+        initialize() {
+            const table = document.createElement('table');
+            for (let x = 0; x < this.board_.length; x++) {
+                const tableRow = document.createElement('tr');
+                for (let y = 0; y < this.board_[x].length; y++) {
+                    const token = document.createElement('div');
+                    token.classList.add('token');
+                    token.classList.add(this.board_[x][y]);
+
+                    const tableElement = document.createElement('th');
+                    tableElement.appendChild(token);
+                    tableRow.appendChild(tableElement);
+                }
+                table.appendChild(tableRow);
+            }
+            $('#board').append(table);
+        }
+    }
+
+    $('document').ready(() => {
+        try {
+            new CodeName().initialize();
+        }
+        catch (err) {
+            alert(err);
+        }
+    });
+    </script>
+</head>
+<body>
+    <div id="board"></div>
+</body>
+</html>

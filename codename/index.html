@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,viewport-fit=cover">
+    <meta name="author" content="Zhikang Fan">
+    <meta name="description" content="Code Name Generator">
+    <title>Code Name Generator</title>
+    <link rel="stylesheet" type="text/css" href="../common.css">
+    <style>
+    table {
+        text-align: left;
+    }
+
+    input[type="number"] {
+        width: 50px;
+    }
+    </style>
+</head>
+<body>
+<form action="generate.html" method="get" target="_blank">
+    <table>
+        <tr>
+             <th>Board:</th>
+             <th>
+                 <input type="number" name="x" min="3" max="6" value="5">
+                 ×
+                 <input type="number" name="y" min="3" max="6" value="5">
+             </th>
+        </tr>
+        <tr>
+             <th>Blue team:</th>
+             <th><input type="number" name="blue" min="3" max="15" value="9"></th>
+        </tr>
+        <tr>
+             <th>Red team:</th>
+             <th><input type="number" name="red" min="3" max="15" value="8"></th>
+        </tr>
+        <tr>
+             <th>Bomb:</th>
+             <th><input type="number" name="bomb" min="0" max="5" value="1"></th>
+        </tr>
+    </table>
+    <input type="submit" value="Generate!">
+</form>
+</body>
+</html>
