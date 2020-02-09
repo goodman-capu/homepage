@@ -110,9 +110,12 @@
             alert(err);
         }
     });
-    $(window).bind('beforeunload', function(e) {
+    const warningFunc = (e) => {
         e.preventDefault();
-    });
+        return 'Are you sure you want to leave this page?';
+    }
+    $(window).bind('beforeunload', warningFunc);
+    $(window).bind('pagehide', warningFunc);
     </script>
     <style>
     #board {
