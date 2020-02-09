@@ -19,7 +19,7 @@
     class Target {
         constructor(min, max, token, number) {
             if (min < 0 || number < min || number > max) {
-                throw 'token number error';
+                throw `Token ${token} number error`;
             }
             this.token_ = token;
             this.number_ = number;
