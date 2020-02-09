@@ -14,28 +14,28 @@
             $('[name=y]').val('5');
             $('[name=blue]').val('8');
             $('[name=red]').val('7');
-            $('[name=bomb]').val('0');
+            $('[name=assassin]').val('0');
         });
         $('#classic').click(() => {
             $('[name=x]').val('5');
             $('[name=y]').val('5');
             $('[name=blue]').val('9');
             $('[name=red]').val('8');
-            $('[name=bomb]').val('1');
+            $('[name=assassin]').val('1');
         });
         $('#hard').click(() => {
             $('[name=x]').val('5');
             $('[name=y]').val('5');
             $('[name=blue]').val('10');
             $('[name=red]').val('9');
-            $('[name=bomb]').val('2');
+            $('[name=assassin]').val('2');
         });
         $('#duet').click(() => {
             $('[name=x]').val('5');
             $('[name=y]').val('5');
             $('[name=blue]').val('9');
             $('[name=red]').val('0');
-            $('[name=bomb]').val('3');
+            $('[name=assassin]').val('3');
         });
         $('#seed').click(() => {
             $('[name=seed]').val(1 + Math.floor(Math.random() * 9999));
@@ -59,7 +59,7 @@
     }
 
     input[type="number"] {
-        width: 50px;
+        width: 60px;
     }
 
     button {
@@ -83,7 +83,7 @@
 
     #seed {
         margin-left: 10px;
-        padding: 4px 8px;
+        padding: 4px 12px;
         font-size: 0.75em;
     }
 
@@ -113,13 +113,13 @@
              <td><input type="number" name="red" min="0" max="15"></td>
         </tr>
         <tr>
-             <th>Bomb:</th>
-             <td><input type="number" name="bomb" min="0" max="5"></td>
+             <th>Assassin:</th>
+             <td><input type="number" name="assassin" min="0" max="5"></td>
         </tr>
         <tr>
              <th>Random seed:</th>
              <td>
-                 <input type="number" name="seed" min="1" max="9999">
+                 <input type="number" name="seed" min="1" max="9999" placeholder="Optional">
                  <button id="seed" type="button">Seed it!</button>
              </td>
         </tr>
