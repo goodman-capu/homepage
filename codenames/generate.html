@@ -140,7 +140,13 @@
     }
 
     #board {
-        padding: 10vmin;
+        margin: 10vmin;
+        padding: 2.5vmin;
+        border-radius: 5vmin;
+        border-style: solid;
+        border-color: rgb(75, 63, 56);
+        border-width: 1.5vmin;
+        background-color: black;
     }
 
     .column-container {
@@ -155,28 +161,52 @@
 
     .token-seat {
         width: 100%;
-        margin: 1.5vmin;
+        margin: 0.75vmin;
     }
 
     .token {
         border-radius: 2vmin;
-        box-shadow: 0 2vmin 4vmin rgba(0, 0, 0, 0.2);
+        position: relative;
+    }
+
+    .token::before {
+        content: "";
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 50%;
+        filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.5));
     }
 
     .token.blank {
-        background-color: Ivory;
+        background-color: rgb(223, 205, 165);
     }
 
     .token.blue {
-        background-color: DeepSkyBlue;
+        background-color: rgb(51, 123, 166);
+    }
+
+    .token.blue::before {
+        background-image: url(blue.png);
     }
 
     .token.red {
-        background-color: OrangeRed;
+        background-color: rgb(217, 55, 56);
+    }
+
+    .token.red::before {
+        background-image: url(red.png);
     }
 
     .token.assassin {
-        background-color: DarkSlateGray;
+        background-color: rgb(49, 48, 47);
+    }
+
+    .token.assassin::before {
+        background-image: url(assassin.png);
+        filter: drop-shadow(0 0 5px rgba(255, 255, 255, 1));
     }
     </style>
 </head>
