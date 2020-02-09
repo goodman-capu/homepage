@@ -41,12 +41,12 @@
     class CodeName {
         constructor() {
             const urlParams = new URLSearchParams(window.location.search);
-            const x = Number(urlParams.get('x'));
-            const y = Number(urlParams.get('y'));
-            const blue = Number(urlParams.get('blue'));
-            const red = Number(urlParams.get('red'));
-            const bomb = Number(urlParams.get('bomb'));
-            this.seed_ = urlParams.get('seed').length > 0 ? Number(urlParams.get('seed')) : undefined;
+            const x = parseInt(urlParams.get('x'));
+            const y = parseInt(urlParams.get('y'));
+            const blue = parseInt(urlParams.get('blue'));
+            const red = parseInt(urlParams.get('red'));
+            const bomb = parseInt(urlParams.get('bomb'));
+            this.seed_ = urlParams.get('seed').length > 0 ? parseInt(urlParams.get('seed')) : undefined;
 
             if (x < 4 || x > 6 || y < 4 || y > 6) {
                 throw 'Board size error';
