@@ -24,8 +24,9 @@
         width: 50px;
     }
 
-    .button {
-        appearance: none;
+    button {
+        -webkit-appearance: none;
+        cursor: pointer;
         padding: 8px 16px;
         background-color: #4caf50;
         color: white;
@@ -33,7 +34,6 @@
         border-radius: 4px;
         font-size: 1em;
         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        cursor: pointer;
     }
     </style>
 </head>
@@ -61,7 +61,7 @@
              <th><input type="number" name="bomb" min="0" max="5" value="1"></th>
         </tr>
     </table>
-    <input class="button" type="submit" value="Generate!">
+    <button type="submit">Generate!</button>
 </form>
 </body>
 </html>
