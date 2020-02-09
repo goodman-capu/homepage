@@ -84,21 +84,24 @@
         }
 
         initialize() {
-            const table = document.createElement('table');
+            const board = document.createElement('div');
+            board.classList.add('column-container');
             for (let x = 0; x < this.board_.length; x++) {
-                const tableRow = document.createElement('tr');
+                const boardRow = document.createElement('div');
+                boardRow.classList.add('row-container');
                 for (let y = 0; y < this.board_[x].length; y++) {
+                    const tokenSeat = document.createElement('div');
+                    tokenSeat.classList.add('token-seat');
                     const token = document.createElement('div');
                     token.classList.add('token');
                     token.classList.add(this.board_[x][y]);
 
-                    const tableElement = document.createElement('th');
-                    tableElement.appendChild(token);
-                    tableRow.appendChild(tableElement);
+                    tokenSeat.appendChild(token);
+                    boardRow.appendChild(tokenSeat);
                 }
-                table.appendChild(tableRow);
+                board.appendChild(boardRow);
             }
-            $('#board').append(table);
+            $('#board').append(board);
         }
     }
 
@@ -112,16 +115,33 @@
     });
     </script>
     <style>
+    .wrapper {
+        max-height: 100vmin;
+        max-width: 100vmin;
+        margin: auto;
+    }
+
     #board {
+        padding: 10vmin;
+    }
+
+    .column-container {
         display: flex;
-        justify-content: center;
-        margin-top: 10vmin;
+        flex-direction: column;
+    }
+
+    .row-container {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .token-seat {
+        width: 100%;
+        margin: 1.5vmin;
     }
 
     .token {
-        width: 15vmin;
-        height: 15vmin;
-        margin: 1vmin;
+        padding-top: 100%;
         border-radius: 2vmin;
         box-shadow: 0 2vmin 4vmin rgba(0, 0, 0, 0.2);
     }
@@ -144,6 +164,8 @@
     </style>
 </head>
 <body>
-    <div id="board"></div>
+    <div class="wrapper">
+        <div id="board"></div>
+    </div>
 </body>
 </html>
