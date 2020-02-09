@@ -162,6 +162,7 @@
     .token-seat {
         width: 100%;
         margin: 0.75vmin;
+        overflow: hidden;
     }
 
     .token {
@@ -172,8 +173,10 @@
     .token::before {
         content: "";
         position: absolute;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
         background-repeat: no-repeat;
         background-position: center;
         background-size: 50%;
