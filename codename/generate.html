@@ -110,6 +110,9 @@
             alert(err);
         }
     });
+    $(window).bind('beforeunload', function(e) {
+        e.preventDefault();
+    });
     </script>
     <style>
     #board {
