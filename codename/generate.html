@@ -7,28 +7,6 @@
     <meta name="description" content="Code Name Generator">
     <title>Code Name Generator</title>
     <link rel="stylesheet" type="text/css" href="../common.css">
-    <style>
-        .token {
-            width: 50px;
-            height: 50px;
-        }
-
-        .token.blank {
-            background-color: white;
-        }
-
-        .token.blue {
-            background-color: blue;
-        }
-
-        .token.red {
-            background-color: red;
-        }
-
-        .token.bomb {
-            background-color: black;
-        }
-    </style>
     <script src="../jquery-3.4.1.min.js"></script>
     <script>
     const Token = {
@@ -133,6 +111,39 @@
         }
     });
     </script>
+    <style>
+    #board {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .token {
+        width: 15vmin;
+        height: 15vmin;
+        margin: 1vmin;
+        border-radius: 2vmin;
+        box-shadow: 0 2vmin 4vmin rgba(0, 0, 0, 0.2);
+    }
+
+    .token.blank {
+        background-color: Ivory;
+    }
+
+    .token.blue {
+        background-color: DeepSkyBlue;
+    }
+
+    .token.red {
+        background-color: OrangeRed;
+    }
+
+    .token.bomb {
+        background-color: DarkSlateGray;
+    }
+    </style>
 </head>
 <body>
     <div id="board"></div>
