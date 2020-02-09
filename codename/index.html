@@ -6,6 +6,44 @@
     <meta name="author" content="Zhikang Fan">
     <meta name="description" content="Code Name Generator">
     <title>Code Name Generator</title>
+    <script src="../jquery-3.4.1.min.js"></script>
+    <script>
+    $(document).ready(() => {
+        $('#easy').click(() => {
+            $('[name=x]').val('5');
+            $('[name=y]').val('5');
+            $('[name=blue]').val('8');
+            $('[name=red]').val('7');
+            $('[name=bomb]').val('0');
+        });
+        $('#classic').click(() => {
+            $('[name=x]').val('5');
+            $('[name=y]').val('5');
+            $('[name=blue]').val('9');
+            $('[name=red]').val('8');
+            $('[name=bomb]').val('1');
+        });
+        $('#hard').click(() => {
+            $('[name=x]').val('5');
+            $('[name=y]').val('5');
+            $('[name=blue]').val('10');
+            $('[name=red]').val('9');
+            $('[name=bomb]').val('2');
+        });
+        $('#duet').click(() => {
+            $('[name=x]').val('5');
+            $('[name=y]').val('5');
+            $('[name=blue]').val('9');
+            $('[name=red]').val('0');
+            $('[name=bomb]').val('3');
+        });
+        $('#seed').click(() => {
+            $('[name=seed]').val(1 + Math.floor(Math.random() * 9999));
+        });
+
+        $('#classic').click();
+    });
+    </script>
     <link rel="stylesheet" type="text/css" href="../common.css">
     <style>
     form {
@@ -17,7 +55,7 @@
 
     table {
         text-align: left;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
     }
 
     input[type="number"] {
@@ -28,12 +66,20 @@
         -webkit-appearance: none;
         cursor: pointer;
         padding: 8px 16px;
-        background-color: #4caf50;
+        margin: 4px;
         color: white;
         border: none;
         border-radius: 4px;
         font-size: 1em;
         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    #easy, #classic, #hard, #duet {
+        background-color: #008cba;
+    }
+
+    #seed, #submit {
+        background-color: #4caf50;
     }
     </style>
 </head>
@@ -42,26 +88,39 @@
     <table>
         <tr>
              <th>Board:</th>
-             <th>
-                 <input type="number" name="x" min="3" max="6" value="5">
+             <td>
+                 <input type="number" name="x" min="4" max="6">
                  ×
-                 <input type="number" name="y" min="3" max="6" value="5">
-             </th>
+                 <input type="number" name="y" min="4" max="6">
+             </td>
         </tr>
         <tr>
              <th>Blue team:</th>
-             <th><input type="number" name="blue" min="3" max="15" value="9"></th>
+             <td><input type="number" name="blue" min="0" max="15"></td>
         </tr>
         <tr>
              <th>Red team:</th>
-             <th><input type="number" name="red" min="3" max="15" value="8"></th>
+             <td><input type="number" name="red" min="0" max="15"></td>
         </tr>
         <tr>
              <th>Bomb:</th>
-             <th><input type="number" name="bomb" min="0" max="5" value="1"></th>
+             <td><input type="number" name="bomb" min="0" max="5"></td>
+        </tr>
+        <tr>
+             <th>Random seed:</th>
+             <td><input type="number" name="seed" min="1" max="9999"></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <button id="easy" type="button">Easy</button>
+                <button id="classic" type="button">Classic</button>
+                <button id="hard" type="button">Hard</button>
+                <button id="duet" type="button">Duet</button>
+            </td>
         </tr>
     </table>
-    <button type="submit">Generate!</button>
+    <button id="seed" type="button">Seed it!</button>
+    <button id="submit" type="submit">Generate!</button>
 </form>
 </body>
 </html>
