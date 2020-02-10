@@ -8,19 +8,20 @@
     <title>Zhikang Fan's homepage</title>
     <link rel="stylesheet" type="text/css" href="common.css">
     <style>
-    header {
+    header, footer {
         padding: 10px 30px;
-        background-color: tomato;
         color: white;
-        font-family: cursive;
+        font-family: Georgia, Times, "Times New Roman", serif;
+        font-style: italic;
+    }
+
+    header {
+        background-color: tomato;
     }
 
     footer {
-        padding: 10px 30px;
         text-align: center;
-        background-color: dimgray;
-        color: white;
-        font-family: cursive;
+        background-color: slategrey;
     }
 
     header a:link, footer a:link {
@@ -34,26 +35,28 @@
     .horizontal {
         padding: 0;
         margin: 0;
-        font-size: 120%;
+        font-size: 1.2em;
         list-style-type: none;
     }
 
     .horizontal li {
         display: inline;
+        line-height: 2em;
     }
 
     .horizontal a {
         padding: 5px;
-        border-radius: 5px;
+        border-radius: 4px;
         text-decoration: none;
     }
 
     .horizontal a:hover {
         background-color: brown;
+        color: white;
     }
 
     .main_frame {
-        padding: 20px;
+        padding: 30px;
     }
 
     @media screen and (min-width: 400px) {
@@ -61,11 +64,11 @@
         position: relative;
         float: right;
         width: 200px;
+        margin-left: 30px;
     }
     }
 
     .side_bar {
-        margin: 20px;
         padding: 20px;
         border-radius: 5px;
         box-shadow: 0 0 10px lightgray;
@@ -96,14 +99,19 @@
         border-collapse: collapse;
     }
 
-    table caption {
-        margin: 20px;
+    td, th {
+        text-align: left;
+        padding: 10px;
     }
 
-    table, td, th {
-        text-align: inherit;
-        padding: 5px;
-        border:1px solid black;
+    table a {
+        text-decoration: none;
+        padding-right: 20px;
+    }
+
+    table img {
+        max-width: 50px;
+        filter: drop-shadow(0 0 3px gray);
     }
     </style>
 </head>
@@ -114,7 +122,6 @@
     </div>
     <ul class="horizontal">
         <li><a href="http://blog.fanzhikang.cn" target="_blank">Blog</a></li>
-        <!--<li><a href="http://mail.fanzhikang.cn" target="_blank">Mail</a></li>-->
         <li><a href="http://cloud.fanzhikang.cn" target="_blank">Cloud Disk</a></li>
         <li><a href="http://mysql.fanzhikang.cn" target="_blank">MySQL</a></li>
         <li><a href="http://admin.fanzhikang.cn" target="_blank">Admin</a></li>
@@ -122,12 +129,10 @@
     </ul>
 </header>
 <div class="main_frame">
-    <!--Navigation bar on the right side-->
     <div class="side_bar">
         <h2>Navigation</h2>
         <ol>
             <li><a href="#intro">Introduction</a></li>
-            <!-- <li><a href="#resume">Resume</a></li> -->
             <li><a href="#links">My Links</a></li>
             <li><a href="#contact">Contact Me</a></li>
         </ol>
@@ -139,50 +144,35 @@
                 Hello, I’m Zhikang Fan from Jiangxi, China. I completed my undergraduate study at Peking University and my master's degree at University of California, San Diego. I'm currently a software engineer in Google LLC @ Mountain View.
             </p>
         </article>
-        <!-- <article id="resume">
-            <h2>Resume</h2>
-            <p>
-                Click <a href="files/resume.pdf" target="_blank">here</a> to open :)
-            </p>
-        </article> -->
         <article id="links">
             <h2>Here are more places where you can know about me</h2>
             <table style="text-align: center">
                 <tr>
                     <th>GitHub</th>
-                    <td colspan="2">
+                    <td>
                         <a href="https://github.com/goodman-capu" target="_blank">
-                            <img src="images/github.png" style="max-width: 50px" alt="GitHub">
+                            <img src="images/github.png" alt="GitHub">
                         </a>
                     </td>
                 </tr>
                 <tr>
                     <th>Linkedin</th>
-                    <td colspan="2">
-                        <a href="https://www.linkedin.com/in/fanzhikang" target="_blank">
-                            <img src="images/linkedin.png" style="max-width: 50px" alt="Linkedin">
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <th rowspan="2">Blogs</th>
-                    <td colspan="2">
-                        <a href="http://blog.fanzhikang.cn" target="_blank">
-                            <img src="images/blog.png" style="max-width: 50px" alt="My Blog">
-                        </a>
-                    </td>
-                </tr>
-                <tr>
                     <td>
-                        <a href="http://weibo.com/fanzhikang" target="_blank">
-                            <img src="images/sina_weibo.png" style="max-width: 50px" alt="Sina Weibo">
+                        <a href="https://www.linkedin.com/in/fanzhikang" target="_blank">
+                            <img src="images/linkedin.png" alt="Linkedin">
                         </a>
                     </td>
-                    <!-- <td>
-                        <a href="http://t.qq.com/fanzhikang" target="_blank">
-                            <img src="images/tencent_weibo.png" style="max-width: 50px" alt="Tencent Weibo">
+                </tr>
+                <tr>
+                    <th>Blogs</th>
+                    <td>
+                        <a href="http://blog.fanzhikang.cn" target="_blank">
+                            <img src="images/blog.png" alt="My Blog">
                         </a>
-                    </td> -->
+                        <a href="http://weibo.com/fanzhikang" target="_blank">
+                            <img src="images/sina_weibo.png" alt="Sina Weibo">
+                        </a>
+                    </td>
                 </tr>
             </table>
         </article>
