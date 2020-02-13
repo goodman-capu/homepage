@@ -100,7 +100,10 @@
                     $('#board').append(token);
                 }
             }
-            $('#board').css({'grid-template-columns': `repeat(${this.x_}, auto)`});
+            $('#board').css({
+                'grid-template-columns': `repeat(${this.x_}, 1fr)`,
+                'grid-template-rows': `repeat(${this.y_}, 1fr)`
+            });
         }
 
         randomInt_(min, max) {
@@ -123,34 +126,32 @@
     });
     </script>
     <style>
+    * {
+        box-sizing: border-box;
+    }
+
     #wrapper {
         min-width: 100vmin;
         max-width: 150vmin;
         height: 100vmin;
+        padding: 10vmin;
         margin: auto;
-        position: relative;
     }
 
     #board {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 71vmin; /* 100 - 2 * (margin + border + padding) */
-        margin: 10vmin;
+        height: 100%;
         padding: 3vmin;
         border-radius: 5vmin;
         border-style: solid;
         border-color: rgb(75, 63, 56);
-        border-width: 1.5vmin;
+        border-width: 1.25vmin;
         background-color: black;
         display: grid;
         grid-gap: 1.25vmin;
     }
 
     .token {
-        border-radius: 2vmin;
+        border-radius: 1.8vmin;
         overflow: hidden;
         background-position: center;
         background-size: contain;
