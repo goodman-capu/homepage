@@ -92,25 +92,15 @@
         }
 
         initialize() {
-            const board = document.createElement('div');
-            board.classList.add('column-container');
             for (let y = 0; y < this.y_; y++) {
-                const boardRow = document.createElement('div');
-                boardRow.classList.add('row-container');
                 for (let x = 0; x < this.x_; x++) {
-                    const tokenSeat = document.createElement('div');
-                    tokenSeat.classList.add('token-seat');
                     const token = document.createElement('div');
                     token.classList.add('token');
                     token.classList.add(this.board_[y][x]);
-
-                    tokenSeat.appendChild(token);
-                    boardRow.appendChild(tokenSeat);
+                    $('#board').append(token);
                 }
-                board.appendChild(boardRow);
             }
-            $('#board').append(board);
-            $('.token').css({'padding-top': `${100 * this.x_ / this.y_}%`});
+            $('#board').css({'grid-template-columns': `repeat(${this.x_}, auto)`});
         }
 
         randomInt_(min, max) {
@@ -133,42 +123,37 @@
     });
     </script>
     <style>
-    .wrapper {
-        max-height: 100vmin;
-        max-width: 100vmin;
+    #wrapper {
+        min-width: 100vmin;
+        max-width: 150vmin;
+        height: 100vmin;
         margin: auto;
+        position: relative;
     }
 
     #board {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
         margin: 10vmin;
-        padding: 2.5vmin;
+        padding: 3vmin;
         border-radius: 5vmin;
         border-style: solid;
         border-color: rgb(75, 63, 56);
         border-width: 1.5vmin;
         background-color: black;
-    }
-
-    .column-container {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .row-container {
-        display: flex;
-        flex-direction: row;
-    }
-
-    .token-seat {
-        width: 100%;
-        margin: 0.75vmin;
-        border-radius: 2vmin;
-        overflow: hidden;
+        display: grid;
+        grid-gap: 1.25vmin;
     }
 
     .token {
+        border-radius: 2vmin;
+        overflow: hidden;
         background-position: center;
         background-size: contain;
+        background-repeat: no-repeat;
     }
 
     .token.blank {
@@ -192,7 +177,7 @@
     </style>
 </head>
 <body>
-    <div class="wrapper">
+    <div id="wrapper">
         <div id="board"></div>
     </div>
 </body>
