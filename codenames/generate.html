@@ -187,6 +187,7 @@
             $('.word-card.clickable').click(function() {
                 $(this).removeClass('opaque');
                 $(this).removeClass('clickable');
+                $(this).unbind('click');
             });
         }
 
