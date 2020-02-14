@@ -119,15 +119,15 @@
     }
 
     #pictures, #classic, #hard, #duet {
-        margin-top: 10px;
-        margin-bottom: 10px;
-        padding: 6px 12px;
+        margin-top: 0.8em;
+        margin-bottom: 0.8em;
+        padding: 0.4em 0.9em;
         font-size: 0.9em;
     }
 
     #public_seed, #captain_seed {
-        margin-left: 15px;
-        padding: 4px 12px;
+        margin-left: 1.5em;
+        padding: 0.4em 0.8em;
         font-size: 0.8em;
     }
 
@@ -136,7 +136,7 @@
     }
 
     [type=submit] {
-        margin-top: 10px;
+        margin-top: 0.8em;
         background-color: #4caf50;
     }
 
@@ -148,6 +148,11 @@
         background-color: #77c47a;
         box-shadow: none;
         cursor: not-allowed;
+    }
+
+    label {
+        margin-right: 0.5em;
+        line-height: 2em;
     }
     </style>
 </head>
@@ -195,6 +200,15 @@
              <td>
                  <input type="number" name="captain" min="1" max="9999" placeholder="Optional">
                  <button id="captain_seed" type="button">Seed it!</button>
+             </td>
+        </tr>
+        <tr>
+             <th>Dictionary:</th>
+             <td>
+                <input type="radio" name="dictionary" id="english" value="english" checked>
+                <label for="english">English</label>
+                <input type="radio" name="dictionary" id="chinese" value="chinese">
+                <label for="chinese">Chinese</label>
              </td>
         </tr>
         <tr>

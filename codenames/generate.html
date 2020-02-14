@@ -67,6 +67,7 @@
             const assassin = parseInt(urlParams.get('assassin'));
             const publicSeed = urlParams.get('public').length > 0 ? new Seed(Number(urlParams.get('public'))) : undefined;
             const captainSeed = urlParams.get('captain').length > 0 ? new Seed(Number(urlParams.get('captain'))) : undefined;
+            const language = urlParams.get('dictionary');
             const mode = urlParams.get('mode');
 
             if (x < 4 || x > 6 || y < 4 || y > 6) {
@@ -91,18 +92,15 @@
                     throw 'Mode error';
             }
 
-            const targets = [
-                new Target(Token.BLUE, blue, 15),
-                new Target(Token.RED, red, 15),
-                new Target(Token.ASSASSIN, assassin, 5),
-            ];
-
             const words = new Array();
             if (mode === Mode.PUBLIC || publicSeed) {
+                if (language !== 'english' && language !== 'chinese') {
+                    throw 'Dictionary language error';
+                }
                 const dictionary = $.get({
-                    url: 'dictionary/english.txt',
+                    url: `dictionary/${language}.txt`,
                     async: false,
-                }).responseText.replace(/\r\n/g, '\n').split('\n');
+                }).responseText.split('\n');
                 for (let i = 0; i < y; i++) {
                     words.push(new Array());
                     for (let j = 0; j < x; j++) {
@@ -120,6 +118,11 @@
 
             const tokens = new Array();
             if (mode === Mode.CAPTAIN || captainSeed) {
+                const targets = [
+                    new Target(Token.BLUE, blue, 15),
+                    new Target(Token.RED, red, 15),
+                    new Target(Token.ASSASSIN, assassin, 5),
+                ];
                 for (let i = 0; i < y; i++) {
                     tokens.push(new Array(x).fill(Token.BLANK));
                 }
