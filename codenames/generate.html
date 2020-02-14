@@ -16,6 +16,25 @@
         ASSASSIN: 'assassin',
     };
 
+    const Mode = {
+        PUBLIC: 'public',
+        CAPTAIN: 'captain',
+    };
+
+    class Seed {
+        constructor(value) {
+            if (!Number.isInteger(value) || value < 1 || value > 9999) {
+                throw 'Seed error or out of range';
+            }
+            this.value_ = value;
+        }
+
+        next() {
+            this.value_ = (this.value_ + 1) % 10000;
+            return this.value_;
+        }
+    }
+
     class Target {
         constructor(token, number, max) {
             if (number < 0 || number > max) {
@@ -46,7 +65,9 @@
             const blue = parseInt(urlParams.get('blue'));
             const red = parseInt(urlParams.get('red'));
             const assassin = parseInt(urlParams.get('assassin'));
-            this.seed_ = urlParams.get('seed').length > 0 ? parseInt(urlParams.get('seed')) : undefined;
+            const publicSeed = urlParams.get('public').length > 0 ? new Seed(Number(urlParams.get('public'))) : undefined;
+            const captainSeed = urlParams.get('captain').length > 0 ? new Seed(Number(urlParams.get('captain'))) : undefined;
+            const mode = urlParams.get('mode');
 
             if (x < 4 || x > 6 || y < 4 || y > 6) {
                 throw 'Board size error';
@@ -54,8 +75,20 @@
             if (blue + red + assassin > x * y) {
                 throw 'Too many tokens';
             }
-            if (this.seed_ && (this.seed_ < 1 || this.seed_ > 9999)) {
-                throw 'Seed out of range';
+
+            switch (mode) {
+                case Mode.PUBLIC:
+                    if (!publicSeed && captainSeed) {
+                        throw 'Please provide public seed';
+                    }
+                    break;
+                case Mode.CAPTAIN:
+                    if (publicSeed && !captainSeed) {
+                        throw 'Please provide captain seed';
+                    }
+                    break;
+                default:
+                    throw 'Mode error';
             }
 
             const targets = [
@@ -63,40 +96,86 @@
                 new Target(Token.RED, red, 15),
                 new Target(Token.ASSASSIN, assassin, 5),
             ];
-            const board = new Array(y);
-            for (let i = 0; i < board.length; i++) {
-                board[i] = new Array(x).fill(Token.BLANK);
-            }
-            while (true) {
-                let filled = true;
-                for (const target of targets) {
-                    if (!target.isFilled()) {
-                        filled = false;
+
+            const words = new Array();
+            if (mode === Mode.PUBLIC || publicSeed) {
+                const dictionary = $.get({
+                    url: 'dictionary/english.txt',
+                    async: false,
+                }).responseText.replace(/\r\n/g, '\n').split('\n');
+                for (let i = 0; i < y; i++) {
+                    words.push(new Array());
+                    for (let j = 0; j < x; j++) {
                         while (true) {
-                            const random_x = this.randomInt_(0, x - 1);
-                            const random_y = this.randomInt_(0, y - 1);
-                            if (board[random_y][random_x] === Token.BLANK) {
-                                board[random_y][random_x] = target.fillOne();
+                            const random_i = this.randomInt_(dictionary.length, publicSeed);
+                            if (dictionary[random_i] !== '') {
+                                words[i].push(dictionary[random_i]);
+                                dictionary[random_i] = '';
                                 break;
                             }
                         }
                     }
                 }
-                if (filled) {
-                    break;
+            }
+
+            const tokens = new Array();
+            if (mode === Mode.CAPTAIN || captainSeed) {
+                for (let i = 0; i < y; i++) {
+                    tokens.push(new Array(x).fill(Token.BLANK));
+                }
+                while (true) {
+                    let filled = true;
+                    for (const target of targets) {
+                        if (!target.isFilled()) {
+                            filled = false;
+                            while (true) {
+                                const random_x = this.randomInt_(x, captainSeed);
+                                const random_y = this.randomInt_(y, captainSeed);
+                                if (tokens[random_y][random_x] === Token.BLANK) {
+                                    tokens[random_y][random_x] = target.fillOne();
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    if (filled) {
+                        break;
+                    }
                 }
             }
+
             this.x_ = x;
             this.y_ = y;
-            this.board_ = board;
+            this.mode_ = mode;
+            this.tokens_ = tokens;
+            this.words_ = words;
         }
 
         initialize() {
+            const hasWords = this.words_.length > 0;
+            const hasTokens = this.tokens_.length > 0;
             for (let y = 0; y < this.y_; y++) {
                 for (let x = 0; x < this.x_; x++) {
                     const token = document.createElement('div');
                     token.classList.add('token');
-                    token.classList.add(this.board_[y][x]);
+                    if (hasTokens) {
+                        token.classList.add(this.tokens_[y][x]);
+                    }
+                    if (hasWords) {
+                        const wordCard = document.createElement('div');
+                        wordCard.classList.add('word-card');
+                        if (this.mode_ === Mode.PUBLIC) {
+                            wordCard.classList.add('opaque');
+                            if (hasTokens) {
+                                wordCard.classList.add('clickable');
+                            }
+                        }
+                        const word = document.createElement('div');
+                        word.classList.add('word');
+                        word.innerText = this.words_[y][x];
+                        wordCard.append(word);
+                        token.append(wordCard);
+                    }
                     $('#board').append(token);
                 }
             }
@@ -104,15 +183,22 @@
                 'grid-template-columns': `repeat(${this.x_}, 1fr)`,
                 'grid-template-rows': `repeat(${this.y_}, 1fr)`
             });
+            $('.word-card.clickable').click(function() {
+                $(this).removeClass('opaque');
+                $(this).removeClass('clickable');
+            });
         }
 
-        randomInt_(min, max) {
-            let ramdom0to1 = Math.random();
-            if (this.seed_) {
-                const n = Math.sin(++this.seed_) * 10000;
+        // Number in range [0, max - 1]
+        randomInt_(max, seed) {
+            let ramdom0to1;
+            if (seed) {
+                const n = Math.sin(seed.next()) * 10000;
                 ramdom0to1 = n - Math.floor(n);
+            } else {
+                ramdom0to1 = Math.random();
             }
-            return Math.floor(min + ramdom0to1 * (max - min + 1));
+            return Math.floor(ramdom0to1 * max);
         }
     }
 
@@ -176,7 +262,41 @@
         background-color: rgb(45, 42, 41);
         background-image: url(assassin.jpg);
     }
+
+    .word-card {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: dimgray;
+        background-color: rgba(255, 255, 255, 0.65);
+        transition: background-color 1s cubic-bezier(0.2, 5, 1, 1), color 1s ease-in;
+    }
+
+    .word-card.opaque {
+        color: black;
+        background-color: rgb(226, 205, 159);
+    }
+
+    .word-card.clickable {
+        cursor: pointer;
+    }
+
+    .word {
+        max-width: 100%;
+        font-size: 2.75vmin;
+        font-weight: bold;
+        font-family: "Courier New", Courier, monospace;
+        text-align: center;
+        word-wrap: break-word;
+        -webkit-user-select: none;
+        pointer-events: none;
+    }
     </style>
+    <link rel="preload" as="image" href="blue.jpg">
+    <link rel="preload" as="image" href="red.jpg">
+    <link rel="preload" as="image" href="assassin.jpg">
 </head>
 <body>
     <div id="wrapper">

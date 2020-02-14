@@ -8,6 +8,10 @@
     <title>Codenames Generator</title>
     <script src="../jquery-3.4.1.min.js"></script>
     <script>
+    function randomSeed() {
+        return 1 + Math.floor(Math.random() * 9999);
+    }
+
     $(document).ready(() => {
         $('#pictures').click(() => {
             $('[name=x]').val('4');
@@ -37,26 +41,30 @@
             $('[name=red]').val('0');
             $('[name=assassin]').val('3');
         });
-        $('#seed').click(() => {
-            $('[name=seed]').val(1 + Math.floor(Math.random() * 9999));
+        $('#public_seed').click(() => {
+            $('[name=public]').val(randomSeed());
         });
-
-        $('#classic').click();
+        $('#captain_seed').click(() => {
+            $('[name=captain]').css({
+                '-webkit-text-security': 'none'
+            });
+            $('[name=captain]').val(randomSeed());
+        });
     });
     </script>
     <link rel="stylesheet" type="text/css" href="../common.css">
     <style>
-    #cover {
-        width: 150px;
-        border-radius: 4px;
-        box-shadow: 0 4px 8px gray;
-    }
-
     form {
         margin: 25px;
         display: flex;
         flex-direction: column;
         align-items: center;
+    }
+
+    #cover {
+        width: 150px;
+        border-radius: 4px;
+        box-shadow: 0 4px 8px gray;
     }
 
     table {
@@ -75,7 +83,6 @@
         padding: 8px 16px;
         margin: 4px;
         color: white;
-        background-color: #008cba;
         border: none;
         border-radius: 4px;
         font-size: 1em;
@@ -85,17 +92,25 @@
 
     #pictures, #classic, #hard, #duet {
         margin-top: 10px;
+        margin-bottom: 10px;
         padding: 6px 12px;
         font-size: 0.9em;
+        background-color: #008cba;
     }
 
-    #seed {
+    #public_seed, #captain_seed {
         margin-left: 15px;
         padding: 4px 12px;
         font-size: 0.8em;
+        background-color: #008cba;
     }
 
-    #submit {
+    [name=captain] {
+        -webkit-text-security: disc;
+    }
+
+    [type=submit] {
+        margin-top: 10px;
         background-color: #4caf50;
     }
     </style>
@@ -107,29 +122,22 @@
         <tr>
              <th>Board:</th>
              <td>
-                 <input type="number" name="x" min="4" max="6">
+                 <input type="number" name="x" min="4" max="6" value="5">
                  ×
-                 <input type="number" name="y" min="4" max="6">
+                 <input type="number" name="y" min="4" max="6" value="5">
              </td>
         </tr>
         <tr>
              <th>Blue team:</th>
-             <td><input type="number" name="blue" min="0" max="15"></td>
+             <td><input type="number" name="blue" min="0" max="15" value="9"></td>
         </tr>
         <tr>
              <th>Red team:</th>
-             <td><input type="number" name="red" min="0" max="15"></td>
+             <td><input type="number" name="red" min="0" max="15" value="8"></td>
         </tr>
         <tr>
              <th>Assassin:</th>
-             <td><input type="number" name="assassin" min="0" max="5"></td>
-        </tr>
-        <tr>
-             <th>Random seed:</th>
-             <td>
-                 <input type="number" name="seed" min="1" max="9999" placeholder="Optional">
-                 <button id="seed" type="button">Seed it!</button>
-             </td>
+             <td><input type="number" name="assassin" min="0" max="5" value="1"></td>
         </tr>
         <tr>
             <td colspan="2">
@@ -139,8 +147,27 @@
                 <button id="duet" type="button">Duet</button>
             </td>
         </tr>
+        <tr>
+             <th>Public seed:</th>
+             <td>
+                 <input type="number" name="public" min="1" max="9999" placeholder="Optional">
+                 <button id="public_seed" type="button">Seed it!</button>
+             </td>
+        </tr>
+        <tr>
+             <th>Captain seed:</th>
+             <td>
+                 <input type="number" name="captain" min="1" max="9999" placeholder="Optional">
+                 <button id="captain_seed" type="button">Seed it!</button>
+             </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <button type="submit" name="mode" value="public">Generate Public</button>
+                <button type="submit" name="mode" value="captain">Generate Captain</button>
+            </td>
+        </tr>
     </table>
-    <button id="submit" type="submit">Generate!</button>
 </form>
 </body>
 </html>
