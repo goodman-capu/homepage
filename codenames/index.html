@@ -12,44 +12,65 @@
         return 1 + Math.floor(Math.random() * 9999);
     }
 
+    function checkSubmit() {
+        const publicSeed = $('[name=public]').val();
+        const captainSeed = $('[name=captain]').val();
+        if (!publicSeed && captainSeed) {
+            $('[value=public]').attr('disabled','disabled');
+        } else {
+            $('[value=public]').removeAttr('disabled');
+        }
+        if (publicSeed && !captainSeed) {
+            $('[value=captain]').attr('disabled','disabled');
+        } else {
+            $('[value=captain]').removeAttr('disabled');
+        }
+    }
+
     $(document).ready(() => {
-        $('#pictures').click(() => {
+        $('#pictures').click(function() {
             $('[name=x]').val('4');
             $('[name=y]').val('5');
             $('[name=blue]').val('7');
             $('[name=red]').val('6');
             $('[name=assassin]').val('1');
         });
-        $('#classic').click(() => {
+        $('#classic').click(function() {
             $('[name=x]').val('5');
             $('[name=y]').val('5');
             $('[name=blue]').val('9');
             $('[name=red]').val('8');
             $('[name=assassin]').val('1');
         });
-        $('#hard').click(() => {
+        $('#hard').click(function() {
             $('[name=x]').val('5');
             $('[name=y]').val('6');
             $('[name=blue]').val('10');
             $('[name=red]').val('9');
             $('[name=assassin]').val('2');
         });
-        $('#duet').click(() => {
+        $('#duet').click(function() {
             $('[name=x]').val('5');
             $('[name=y]').val('5');
             $('[name=blue]').val('9');
             $('[name=red]').val('0');
             $('[name=assassin]').val('3');
         });
-        $('#public_seed').click(() => {
+        $('#public_seed').click(function() {
             $('[name=public]').val(randomSeed());
+            checkSubmit();
         });
-        $('#captain_seed').click(() => {
+        $('#captain_seed').click(function() {
             $('[name=captain]').css({
                 '-webkit-text-security': 'none'
             });
             $('[name=captain]').val(randomSeed());
+            checkSubmit();
         });
+        $('[name=public], [name=captain]').change(function() {
+            checkSubmit();
+        });
+        checkSubmit();
     });
     </script>
     <link rel="stylesheet" type="text/css" href="../common.css">
@@ -87,7 +108,14 @@
         border-radius: 4px;
         font-size: 1em;
         font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        background-color: #008cba;
         box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #007ea7;
+        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.4);
     }
 
     #pictures, #classic, #hard, #duet {
@@ -95,14 +123,12 @@
         margin-bottom: 10px;
         padding: 6px 12px;
         font-size: 0.9em;
-        background-color: #008cba;
     }
 
     #public_seed, #captain_seed {
         margin-left: 15px;
         padding: 4px 12px;
         font-size: 0.8em;
-        background-color: #008cba;
     }
 
     [name=captain] {
@@ -112,6 +138,16 @@
     [type=submit] {
         margin-top: 10px;
         background-color: #4caf50;
+    }
+
+    [type=submit]:hover {
+        background-color: #449d48;
+    }
+
+    [type=submit]:disabled {
+        background-color: #77c47a;
+        box-shadow: none;
+        cursor: not-allowed;
     }
     </style>
 </head>
