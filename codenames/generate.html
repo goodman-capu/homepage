@@ -65,8 +65,8 @@
             const blue = parseInt(urlParams.get('blue'));
             const red = parseInt(urlParams.get('red'));
             const assassin = parseInt(urlParams.get('assassin'));
-            const publicSeed = urlParams.get('public').length > 0 ? new Seed(Number(urlParams.get('public'))) : undefined;
-            const captainSeed = urlParams.get('captain').length > 0 ? new Seed(Number(urlParams.get('captain'))) : undefined;
+            const publicSeed = urlParams.get('public').length > 0 ? new Seed(Number(urlParams.get('public'))) : null;
+            const captainSeed = urlParams.get('captain').length > 0 ? new Seed(Number(urlParams.get('captain'))) : null;
             const language = urlParams.get('dictionary');
             const mode = urlParams.get('mode');
 
@@ -100,7 +100,7 @@
                 const dictionary = $.get({
                     url: `dictionary/${language}.txt`,
                     async: false,
-                }).responseText.split('\n').filter(word => word.length > 0);
+                }).responseText.split('\n').filter(w => w.length > 0 && !w.startsWith('//'));
                 for (let i = 0; i < y; i++) {
                     words.push(new Array());
                     for (let j = 0; j < x; j++) {
