@@ -92,7 +92,7 @@
                     throw 'Mode error';
             }
 
-            const words = new Array();
+            const words = [];
             if (mode === Mode.PUBLIC || publicSeed) {
                 if (language !== 'english' && language !== 'chinese') {
                     throw 'Dictionary language error';
@@ -102,7 +102,7 @@
                     async: false,
                 }).responseText.split('\n').filter(w => w.length > 0 && !w.startsWith('//')).sort();
                 if (window.location.hostname === 'localhost') {
-                    const duplicates = new Array();
+                    const duplicates = [];
                     for (let i = 0; i < dictionary.length - 1; i++) {
                         if (dictionary[i] === dictionary[i + 1]) {
                             duplicates.push(dictionary[i]);
@@ -116,7 +116,7 @@
                     }
                 }
                 for (let i = 0; i < y; i++) {
-                    words.push(new Array());
+                    words.push([]);
                     for (let j = 0; j < x; j++) {
                         while (true) {
                             const random_i = this.randomInt_(dictionary.length, publicSeed);
@@ -130,7 +130,7 @@
                 }
             }
 
-            const tokens = new Array();
+            const tokens = [];
             if (mode === Mode.CAPTAIN || captainSeed) {
                 const targets = [
                     new Target(Token.BLUE, blue, 15),
