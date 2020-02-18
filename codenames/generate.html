@@ -100,7 +100,21 @@
                 const dictionary = $.get({
                     url: `dictionary/${language}.txt`,
                     async: false,
-                }).responseText.split('\n').filter(w => w.length > 0 && !w.startsWith('//'));
+                }).responseText.split('\n').filter(w => w.length > 0 && !w.startsWith('//')).sort();
+                if (window.location.hostname === 'localhost') {
+                    const duplicates = new Array();
+                    for (let i = 0; i < dictionary.length - 1; i++) {
+                        if (dictionary[i] === dictionary[i + 1]) {
+                            duplicates.push(dictionary[i]);
+                            while (dictionary[i] === dictionary[i + 1]) {
+                                i++;
+                            }
+                        }
+                    }
+                    if (duplicates.length > 0) {
+                        throw `Duplicate ${duplicates.length > 1 ? 'keys' : 'key'} in dictionary:\n${duplicates.join(', ')}`;
+                    }
+                }
                 for (let i = 0; i < y; i++) {
                     words.push(new Array());
                     for (let j = 0; j < x; j++) {
