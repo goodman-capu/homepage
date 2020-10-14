@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,viewport-fit=cover">
+    <meta name="author" content="Zhikang Fan">
+    <meta name="description" content="Member's homepage">
+    <title>Member's homepage</title>
+    <link rel="stylesheet" type="text/css" href="../common.css">
+    <script src="../memberspace.js"></script>
+    <script>
+      (function() {
+        MemberSpace.onReady = MemberSpace.onReady || [];
+        MemberSpace.onReady.push(function(args) {
+          if (args.member) {
+              const member = args.member;
+              console.log(member);
+              document.getElementById("name").innerText = member.name;
+              document.getElementById("email").innerText = member.email;
+          }
+        });
+      }());
+    </script>
+</head>
+<body>
+    <h1>This is member's homepage!</h1>
+    <span>Your name is: </span><span id="name">?</span>
+    <span>Your email is: </span><span id="email">?</span>
+</body>
+
+</html>
